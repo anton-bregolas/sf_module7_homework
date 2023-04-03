@@ -276,18 +276,19 @@ const laptop2 = new ElectronicDevice('Laptop', 'off', 30);
 // Adjusting power setting or switching on power saving mode...
 // activeDeviceList refreshed...
 
-heater.adjustPower(5);
-fridge.adjustPower(6);
-laptop.setEcoMode();
+heater.adjustPower(5);          // "This Heater is at power setting 5, consuming 1250 Watt-hour of energy."
+fridge.adjustPower(6);          // "This Fridge is at power setting 6, consuming 25 Watt-hour of energy."
+laptop.setEcoMode();            // "This Laptop is in power saving mode, consuming 43 Watt-hour of energy."
 
 // Getting total power of currently active devices...
 // activeDeviceList read...
 
-calcCurrentActivePower();
+calcCurrentActivePower();       // "The total power of active devices is currently 1318 Watt-hour."
 
 // A specified list of devices switched on and their total active power calculated...
 
-calcTotalActivePowerOf(laptop, heater, fridge, oldac, laptop2);
+calcTotalActivePowerOf(laptop, heater, fridge, oldac, laptop2); // "5 devices were selected and switched on; 
+                                                                // their total power is 3348 Watt-hour."
 
 // Write the total no. of hours and days the selected devices will be used for future calculations...
 
@@ -299,13 +300,14 @@ laptop2.setActiveIdleUseTime(10, 20, 5);
 
 // Calculate total energy consumption of the devices specified [over the period of hours, days]...
 
-heater.calcEnergyConsumption();
-fridge.calcEnergyConsumption();
-oldac.calcEnergyConsumption();
-laptop.calcEnergyConsumption();
-laptop2.calcEnergyConsumption();
+heater.calcEnergyConsumption();     // "This Heater consumes 300.00 kWh a month."
+fridge.calcEnergyConsumption();     // "This Fridge consumes 18.00 kWh a month."
+oldac.calcEnergyConsumption();      // "This Old AC consumes 60.00 kWh a month."
+laptop.calcEnergyConsumption();     // "This Laptop consumes 10.86 kWh a month."
+laptop2.calcEnergyConsumption();    // "This Laptop consumes 3.15 kWh a month."
 
 // Total energy consumed by all of the devices on the activeDeviceList...
 
-calcTotalEnergyConsumption();
+calcTotalEnergyConsumption();       // "All of the active devices combined consume 
+                                    // a whopping 391.75 kWh a month."
 
