@@ -34,7 +34,7 @@
 //
 // - calcCurrentActivePower: calculates the total power consumption of currently active devices (from the list)
 // - calcTotalActivePower: switches on the user-specified devices and calculates their total power consumption
-// - calcEnergyConsumption: 
+// - calcEnergyConsumption: calculates the total power consumption of a device over the pre-set period of hours and days
 
 
 function Device(name, state, power) {
@@ -70,19 +70,19 @@ Device.prototype.updateDeviceList = function () {
 Device.prototype.clearDeviceList = function () {
 
     let i = activeDeviceList.indexOf(this);
-    
+
     if (i != -1) {
-        activeDeviceList.splice(i, 1);       
+        activeDeviceList.splice(i, 1);
     }
-    
+
 }
 
 Device.prototype.refreshDeviceList = function () {
-    
+
     if (this.deviceStatus = "on" || this.deviceStatus == 1) {
 
-    this.clearDeviceList();
-    this.updateDeviceList();
+        this.clearDeviceList();
+        this.updateDeviceList();
 
     }
 }
@@ -162,7 +162,7 @@ function calcTotalActivePowerOf(...devices) {
 
 }
 
-Device.prototype.setActiveUseTime = function (hours_used = 0, days_used = 0) {
+Device.prototype.setActiveUseTime = function (hours_used = 0, days_used = 1) {
 
     this.deviceHoursUsed = hours_used;
     this.deviceDaysUsed = days_used;
@@ -182,6 +182,33 @@ Device.prototype.calcEnergyConsumption = function () {
 
     console.log(`This ${this.deviceName} consumes ${totalEnergyConsumed.toFixed(2)} kWh a month.`);
     return totalEnergyConsumed;
+}
+
+function calcTotalEnergyConsumption() {
+
+    let deviceMonthlyPowerTotal = 0;
+
+    for (let device of activeDeviceList) {
+
+        if (device.deviceHoursUsed > 0) {
+
+            if (ElectronicDevice.prototype.isPrototypeOf(device) && this.deviceIdleDailyHours > 0) {
+
+                let idleEnergyConsumed = (this.devicePower / 20 * this.deviceIdleDailyHours * this.deviceDaysUsed);
+
+                deviceMonthlyPowerTotal += idleEnergyConsumed;
+
+            }
+
+            deviceMonthlyPowerTotal += (device.devicePower * device.deviceHoursUsed * device.deviceDaysUsed);
+        }
+    }
+
+    deviceMonthlyPowerTotal = deviceMonthlyPowerTotal / 1000;
+
+    console.log(`All of the active devices combined consume a whopping ${deviceMonthlyPowerTotal.toFixed(2)} kWh a month.`);
+    return deviceMonthlyPowerTotal;
+
 }
 
 ElectronicDevice.prototype = new Device();
@@ -241,7 +268,7 @@ ElectronicDevice.prototype.setActiveIdleUseTime = function (hours_used = 0, days
 
 const heater = new Device('Heater', 'on', 2500);
 const laptop = new ElectronicDevice('Laptop', 'on', 86);
-const fridge = new Device('Fridge', 'on', 1000/24);
+const fridge = new Device('Fridge', 'on', 1000 / 24);
 const oldac = new Device('Old AC', 'off', 2000);
 const laptop2 = new ElectronicDevice('Laptop', 'off', 30);
 
@@ -259,7 +286,7 @@ calcCurrentActivePower();
 
 // A specified list of devices switched on and their total active power calculated...
 
-calcTotalActivePowerOf(laptop, heater, fridge);
+calcTotalActivePowerOf(laptop, heater, fridge, oldac, laptop2);
 
 // Write the total no. of hours and days the selected devices will be used for future calculations...
 
@@ -276,4 +303,8 @@ fridge.calcEnergyConsumption();
 oldac.calcEnergyConsumption();
 laptop.calcEnergyConsumption();
 laptop2.calcEnergyConsumption();
+
+// Total energy consumed by all of the devices on the activeDeviceList
+
+calcTotalEnergyConsumption();
 
