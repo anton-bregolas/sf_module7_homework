@@ -34,7 +34,8 @@
 //
 // - calcCurrentActivePower: calculates the total power consumption of currently active devices (from the list)
 // - calcTotalActivePower: switches on the user-specified devices and calculates their total power consumption
-// - calcEnergyConsumption: calculates the total power consumption of a device over the pre-set period of hours and days
+// - calcEnergyConsumption: calculates the total power consumption of one device over the pre-set period of hours and days
+// - calcTotalEnergyConsumption: calculates the total power consumed by the devices on activeDeviceList using pre-set hours
 
 
 function Device(name, state, power) {
@@ -304,7 +305,7 @@ oldac.calcEnergyConsumption();
 laptop.calcEnergyConsumption();
 laptop2.calcEnergyConsumption();
 
-// Total energy consumed by all of the devices on the activeDeviceList
+// Total energy consumed by all of the devices on the activeDeviceList...
 
 calcTotalEnergyConsumption();
 
