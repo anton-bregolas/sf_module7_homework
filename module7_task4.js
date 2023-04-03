@@ -193,9 +193,9 @@ function calcTotalEnergyConsumption() {
 
         if (device.deviceHoursUsed > 0) {
 
-            if (ElectronicDevice.prototype.isPrototypeOf(device) && this.deviceIdleDailyHours > 0) {
+            if (ElectronicDevice.prototype.isPrototypeOf(device) && device.deviceIdleDailyHours > 0) {
 
-                let idleEnergyConsumed = (this.devicePower / 20 * this.deviceIdleDailyHours * this.deviceDaysUsed);
+                let idleEnergyConsumed = (device.devicePower / 20 * device.deviceIdleDailyHours * device.deviceDaysUsed);
 
                 deviceMonthlyPowerTotal += idleEnergyConsumed;
 
@@ -309,5 +309,5 @@ laptop2.calcEnergyConsumption();    // "This Laptop consumes 3.15 kWh a month."
 // Total energy consumed by all of the devices on the activeDeviceList...
 
 calcTotalEnergyConsumption();       // "All of the active devices combined consume 
-                                    // a whopping 391.75 kWh a month."
+                                    // a whopping 392.01 kWh a month."
 
