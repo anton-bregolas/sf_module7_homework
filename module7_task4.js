@@ -235,17 +235,6 @@ ElectronicDevice.prototype.setActiveIdleUseTime = function (hours_used = 0, days
 
 }
 
-// ElectronicDevice.calcEnergyConsumption = function () {
-
-//     console.log(`${this.deviceName} Check!`);
-
-//     let activeEnergyConsumed = this.devicePower * this.deviceHoursUsed * this.deviceDaysUsed;
-//     let idleEnergyConsumed = (this.devicePower / 20) * this.deviceIdleUse * this.deviceDaysUsed;
-//     let totalEnergyConsumed = (activeEnergyConsumed + idleEnergyConsumed) / 1000;
-
-//     console.log(`This ${this.deviceName} consumes ${totalEnergyConsumed.toFixed(2)} kWh a month.`);
-//     return totalEnergyConsumed;
-// }
 
 // Devices defined, max power settings assigned...
 // activeDeviceList updated...
